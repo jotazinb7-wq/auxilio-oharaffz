@@ -20,7 +20,7 @@ html,body{
   min-height:100%;
   margin:0;
   background:#000;
-  overflow:auto; /* agora é rolável */
+  overflow:auto;
   font-family:Arial,Helvetica,sans-serif;
 }
 
@@ -65,6 +65,11 @@ button.active{background:var(--main);box-shadow:0 0 20px var(--main)}
 
 /* INJETAR */
 #inject{margin-top:16px;background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));animation:rgb 4s linear infinite}
+
+/* BOTÃO EXTRA APÓS INJETAR */
+#injectContainer button{
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -121,6 +126,8 @@ button.active{background:var(--main);box-shadow:0 0 20px var(--main)}
       </div>
 
       <button id="inject">INJETAR</button>
+      <div id="injectContainer"></div>
+
     </div>
   </div>
 </div>
@@ -166,8 +173,9 @@ backBtn.onclick=()=>{infoScreen.style.display="none"; resetInject();};
 
 /* Reset INJETAR */
 const injectBtn=document.getElementById("inject");
+const injectContainer=document.getElementById("injectContainer");
 let injecting=false,injected=false;
-function resetInject(){ injecting=false; injected=false; injectBtn.textContent="INJETAR"; }
+function resetInject(){ injecting=false; injected=false; injectBtn.textContent="INJETAR"; injectContainer.innerHTML=""; }
 
 /* Seleções */
 document.querySelectorAll(".hs").forEach(b=>{
@@ -191,11 +199,23 @@ bypassBtn.onclick=()=>{
   resetInject();
 };
 
-/* INJETAR */
+/* INJETAR com botão extra */
 injectBtn.onclick=()=>{
   if(injecting||injected) return;
   injecting=true; injectBtn.textContent="Injetando códigos...";
-  setTimeout(()=>{ injecting=false; injected=true; injectBtn.textContent="Códigos injetados com sucesso"; },5000);
+
+  setTimeout(()=>{
+      injecting=false; injected=true; injectBtn.textContent="Códigos injetados com sucesso";
+
+      // Botão que aparece depois
+      injectContainer.innerHTML='';
+      const openBtn=document.createElement("button");
+      openBtn.textContent="Abrir Free Fire";
+      openBtn.className="toggle";
+      openBtn.onclick=()=>{alert("Simulação: Abrir Free Fire");};
+      injectContainer.appendChild(openBtn);
+
+  },5000);
 };
 
 /* TEMAS */
