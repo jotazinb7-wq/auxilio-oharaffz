@@ -32,7 +32,7 @@ html,body{
 #keyBox h2{color:#fff;margin-bottom:12px}
 #keyInput{width:100%;padding:12px;border:none;border-radius:12px;background:#111;color:#fff;text-align:center}
 #keyBtn{width:100%;margin-top:12px;padding:12px;border:none;border-radius:14px;font-weight:bold;color:#fff;
-  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));animation:rgb 4s linear infinite}
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));animation:rgb 2s linear infinite} /* animação mais rápida */
 #error{color:#ff4444;font-size:13px;margin-top:8px;display:none}
 
 /* PAINEL */
@@ -64,12 +64,10 @@ button.active{background:var(--main);box-shadow:0 0 20px var(--main)}
 .infoText{color:#ccc;font-size:14px;margin-top:6px}
 
 /* INJETAR */
-#inject{margin-top:16px;background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));animation:rgb 4s linear infinite}
+#inject{margin-top:16px;background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));animation:rgb 2s linear infinite}
 
-/* BOTÃO EXTRA APÓS INJETAR */
-#injectContainer button{
-  margin-top:10px;
-}
+/* BOTÃO FIXO PARA ABRIR FREE FIRE */
+#openFF{background:#111;margin-top:10px;font-weight:bold;color:#fff;box-shadow:0 0 10px var(--main);border-radius:12px;padding:12px;}
 </style>
 </head>
 
@@ -126,7 +124,9 @@ button.active{background:var(--main);box-shadow:0 0 20px var(--main)}
       </div>
 
       <button id="inject">INJETAR</button>
-      <div id="injectContainer"></div>
+
+      <!-- BOTÃO FIXO PARA ABRIR FREE FIRE -->
+      <button id="openFF">Abra o Free Fire</button>
 
     </div>
   </div>
@@ -169,13 +169,12 @@ const infoBtn=document.getElementById("infoBtn");
 const infoScreen=document.getElementById("infoScreen");
 const backBtn=document.getElementById("backBtn");
 infoBtn.onclick=()=>infoScreen.style.display="block";
-backBtn.onclick=()=>{infoScreen.style.display="none"; resetInject();};
+backBtn.onclick=()=>{infoScreen.style.display="none";};
 
 /* Reset INJETAR */
 const injectBtn=document.getElementById("inject");
-const injectContainer=document.getElementById("injectContainer");
 let injecting=false,injected=false;
-function resetInject(){ injecting=false; injected=false; injectBtn.textContent="INJETAR"; injectContainer.innerHTML=""; }
+function resetInject(){ injecting=false; injected=false; injectBtn.textContent="INJETAR"; }
 
 /* Seleções */
 document.querySelectorAll(".hs").forEach(b=>{
@@ -199,23 +198,17 @@ bypassBtn.onclick=()=>{
   resetInject();
 };
 
-/* INJETAR com botão extra */
+/* INJETAR */
 injectBtn.onclick=()=>{
   if(injecting||injected) return;
   injecting=true; injectBtn.textContent="Injetando códigos...";
+  setTimeout(()=>{ injecting=false; injected=true; injectBtn.textContent="Códigos injetados com sucesso"; },2000); // menor tempo
+};
 
-  setTimeout(()=>{
-      injecting=false; injected=true; injectBtn.textContent="Códigos injetados com sucesso";
-
-      // Botão que aparece depois
-      injectContainer.innerHTML='';
-      const openBtn=document.createElement("button");
-      openBtn.textContent="Abrir Free Fire";
-      openBtn.className="toggle";
-      openBtn.onclick=()=>{alert("Simulação: Abrir Free Fire");};
-      injectContainer.appendChild(openBtn);
-
-  },5000);
+/* BOTÃO FIXO ABRIR FREE FIRE */
+const openFF=document.getElementById("openFF");
+openFF.onclick=()=>{
+  alert("Simulação: Abra o Free Fire"); // só simula no HTML/APK WebView
 };
 
 /* TEMAS */
