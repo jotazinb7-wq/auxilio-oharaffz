@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Auxílio Ohara.ffz</title>
+
+<style>
+:root{
+  --main:#ff0033;
+  --bg:#050505;
+  --a1:#ff0000;
+  --a2:#00ffe1;
+  --a3:#ff00ff;
+}
+
+html,body{
+  width:100%;height:100%;margin:0;background:#000;overflow:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+@keyframes rgb{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+
+/* KEY */
+#keyScreen{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
+#keyBox{width:90%;max-width:320px;background:#060606;padding:20px;border-radius:18px;box-shadow:0 0 25px var(--main);text-align:center}
+#keyBox h2{color:#fff;margin-bottom:12px}
+#keyInput{width:100%;padding:12px;border:none;border-radius:12px;background:#111;color:#fff;text-align:center}
+#keyBtn{width:100%;margin-top:12px;padding:12px;border:none;border-radius:14px;font-weight:bold;color:#fff;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));animation:rgb 4s linear infinite}
+#error{color:#ff4444;font-size:13px;margin-top:8px;display:none}
+
+/* PAINEL */
+#panel{position:fixed;inset:0;background:#050505;display:none}
+#box{width:92%;max-width:360px;margin:6vh auto;background:var(--bg);border-radius:20px;box-shadow:0 0 30px var(--main)}
+#header{padding:14px;text-align:center;font-weight:bold;color:#fff;border-radius:20px 20px 0 0;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3))}
+#content{padding:14px;color:#fff}
+
+button{
+  width:100%;padding:12px;margin-top:10px;border:none;border-radius:14px;background:#0b0b0b;color:#fff;
+  font-weight:bold;box-shadow:0 0 10px var(--main), inset 0 0 6px rgba(255,0,0,.6)
+}
+button.active{background:var(--main);box-shadow:0 0 20px var(--main)}
+.label{font-size:13px;margin-top:14px;color:#ccc}
+
+/* Quadradinhos */
+.square-row{display:flex;gap:8px;margin-top:10px}
+.square{flex:1;padding:10px 6px;border-radius:10px;font-size:11px}
+
+/* DPI */
+.dpi-row{display:flex;gap:8px;margin-top:10px}
+.dpi-btn{flex:1;padding:8px 4px;border-radius:8px;background:#111;font-size:11px}
+
+/* INFO */
+#infoScreen{position:fixed;inset:0;background:#000;display:none;z-index:50}
+#infoBox{width:90%;max-width:330px;margin:12vh auto;background:#050505;border-radius:18px;padding:20px;
+  box-shadow:0 0 30px var(--main);text-align:center}
+.infoText{color:#ccc;font-size:14px;margin-top:6px}
+
+/* INJETAR */
+#inject{margin-top:16px;background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));animation:rgb 4s linear infinite}
+</style>
+</head>
+
+<body>
+
+<!-- KEY -->
+<div id="keyScreen">
+  <div id="keyBox">
+    <h2>Auxílio Ohara.ffz</h2>
+    <input id="keyInput" type="password" placeholder="Digite sua Key">
+    <button id="keyBtn">Verificar Key</button>
+    <div id="error">Key inválida</div>
+  </div>
+</div>
+
+<!-- PAINEL -->
+<div id="panel">
+  <div id="box">
+    <div id="header">Auxilio @Ohara.ffz e @ronyzin_29</div>
+    <div id="content">
+
+      <button id="infoBtn">INFO</button>
+
+      <div class="label">Headshot (escolha um)</div>
+      <button class="hs">HS alto</button>
+      <button class="hs">HS pescoço</button>
+      <button class="hs">peito (disfarçar)</button>
+
+      <div class="label">Modo de ativação</div>
+      <button class="activation">Ao olhar</button>
+      <button class="activation">Ao atirar</button>
+
+      <div class="label">Precisão & Recoil</div>
+      <button class="toggle">Aumentar precisão</button>
+      <button class="toggle">No recoil</button>
+      <button class="toggle">Aimlock</button>
+
+      <!-- NOVA FUNÇÃO -->
+      <button class="toggle">Easy Head</button>
+
+      <button id="bypassBtn" class="toggle">Ativar bypass</button>
+
+      <div class="label">Otimizações</div>
+      <div class="square-row">
+        <button class="square opt">Otimizar<br>Sensibilidade</button>
+        <button class="square opt">Otimizar<br>Jogo</button>
+        <button class="square opt">Otimizar<br>FPS</button>
+      </div>
+
+      <div class="label">DPI</div>
+      <div class="dpi-row">
+        <button class="dpi-btn dpi">dpi baixa<br>(360/470)</button>
+        <button class="dpi-btn dpi">dpi média<br>(510/650)</button>
+        <button class="dpi-btn dpi">dpi alta<br>(711/1100)</button>
+      </div>
+
+      <button id="inject">INJETAR</button>
+    </div>
+  </div>
+</div>
+
+<!-- INFO -->
+<div id="infoScreen">
+  <div id="infoBox">
+    <h3 style="color:#fff">Informações do painel</h3>
+    <div class="infoText">criadores do painel</div>
+    <div class="infoText">@Ohara.ffz</div>
+    <div class="infoText">@ronyzin_29</div>
+
+    <div class="label">Cor da interface</div>
+    <button onclick="setTheme('pink')">Preto e rosa</button>
+    <button onclick="setTheme('purple')">Preto e roxo</button>
+    <button onclick="setTheme('red')">Vermelho e preto</button>
+    <button onclick="setTheme('default')">Resetar padrão</button>
+
+    <button id="backBtn">VOLTAR</button>
+  </div>
+</div>
+
+<script>
+const CORRECT_KEY="GN-273142";
+const keyBtn=document.getElementById("keyBtn");
+const keyInput=document.getElementById("keyInput");
+const keyScreen=document.getElementById("keyScreen");
+const panel=document.getElementById("panel");
+const error=document.getElementById("error");
+
+keyBtn.onclick=()=>{
+  const t=keyInput.value.replace(/\s+/g,"").toUpperCase();
+  if(t===CORRECT_KEY){ keyScreen.style.display="none"; panel.style.display="block"; error.style.display="none"; }
+  else{ error.style.display="block"; keyInput.value=""; }
+};
+
+/* INFO */
+const infoBtn=document.getElementById("infoBtn");
+const infoScreen=document.getElementById("infoScreen");
+const backBtn=document.getElementById("backBtn");
+infoBtn.onclick=()=>infoScreen.style.display="block";
+backBtn.onclick=()=>{infoScreen.style.display="none"; resetInject();};
+
+/* Reset INJETAR */
+const injectBtn=document.getElementById("inject");
+let injecting=false,injected=false;
+function resetInject(){ injecting=false; injected=false; injectBtn.textContent="INJETAR"; }
+
+/* Seleções */
+document.querySelectorAll(".hs").forEach(b=>{
+  b.onclick=()=>{document.querySelectorAll(".hs").forEach(x=>x.classList.remove("active"));b.classList.add("active");resetInject();}
+});
+document.querySelectorAll(".activation").forEach(b=>{
+  b.onclick=()=>{document.querySelectorAll(".activation").forEach(x=>x.classList.remove("active"));b.classList.add("active");resetInject();}
+});
+document.querySelectorAll(".toggle,.opt").forEach(b=>{
+  b.onclick=()=>{b.classList.toggle("active");resetInject();}
+});
+document.querySelectorAll(".dpi").forEach(b=>{
+  b.onclick=()=>{document.querySelectorAll(".dpi").forEach(x=>x.classList.remove("active"));b.classList.add("active");resetInject();}
+});
+
+/* Bypass */
+const bypassBtn=document.getElementById("bypassBtn");
+bypassBtn.onclick=()=>{
+  bypassBtn.classList.toggle("active");
+  bypassBtn.textContent=bypassBtn.classList.contains("active")?"Bypass ativado":"Ativar bypass";
+  resetInject();
+};
+
+/* INJETAR */
+injectBtn.onclick=()=>{
+  if(injecting||injected) return;
+  injecting=true; injectBtn.textContent="Injetando códigos...";
+  setTimeout(()=>{ injecting=false; injected=true; injectBtn.textContent="Códigos injetados com sucesso"; },5000);
+};
+
+/* TEMAS */
+function setTheme(t){
+  const r=document.documentElement.style;
+  if(t==="pink"){ r.setProperty("--main","#ff4da6"); r.setProperty("--a1","#ff4da6"); r.setProperty("--a2","#ff80bf"); r.setProperty("--a3","#ff1a8c"); }
+  else if(t==="purple"){ r.setProperty("--main","#a855f7"); r.setProperty("--a1","#7c3aed"); r.setProperty("--a2","#a855f7"); r.setProperty("--a3","#c084fc"); }
+  else if(t==="red"){ r.setProperty("--main","#ff0000"); r.setProperty("--a1","#ff0000"); r.setProperty("--a2","#000000"); r.setProperty("--a3","#ff0000"); }
+  else{ r.setProperty("--main","#ff0033"); r.setProperty("--a1","#ff0000"); r.setProperty("--a2","#00ffe1"); r.setProperty("--a3","#ff00ff"); }
+}
+</script>
+
+</body>
+</html>
