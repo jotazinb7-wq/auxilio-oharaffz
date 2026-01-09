@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="theme-color" content="#000000">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
 <title>Auxílio Ohara.ffz</title>
 
 <style>
@@ -16,7 +16,11 @@
 }
 
 html,body{
-  width:100%;height:100%;margin:0;background:#000;overflow:hidden;
+  width:100%;
+  min-height:100%;
+  margin:0;
+  background:#000;
+  overflow:auto; /* agora é rolável */
   font-family:Arial,Helvetica,sans-serif;
 }
 
@@ -32,15 +36,15 @@ html,body{
 #error{color:#ff4444;font-size:13px;margin-top:8px;display:none}
 
 /* PAINEL */
-#panel{position:fixed;inset:0;background:#050505;display:none}
-#box{width:92%;max-width:360px;margin:6vh auto;background:var(--bg);border-radius:20px;box-shadow:0 0 30px var(--main)}
+#panel{position:relative;background:#050505;display:none;padding-bottom:40px}
+#box{width:92%;max-width:360px;margin:20px auto;background:var(--bg);border-radius:20px;box-shadow:0 0 30px var(--main)}
 #header{padding:14px;text-align:center;font-weight:bold;color:#fff;border-radius:20px 20px 0 0;
   background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3))}
 #content{padding:14px;color:#fff}
 
 button{
   width:100%;padding:12px;margin-top:10px;border:none;border-radius:14px;background:#0b0b0b;color:#fff;
-  font-weight:bold;box-shadow:0 0 10px var(--main), inset 0 0 6px rgba(255,0,0,.6)
+  font-weight:bold;box-shadow:0 0 10px var(--main), inset 0 0 6px rgba(255,0,0,.6);
 }
 button.active{background:var(--main);box-shadow:0 0 20px var(--main)}
 .label{font-size:13px;margin-top:14px;color:#ccc}
@@ -98,7 +102,6 @@ button.active{background:var(--main);box-shadow:0 0 20px var(--main)}
       <button class="toggle">No recoil</button>
       <button class="toggle">Aimlock</button>
 
-      <!-- NOVA FUNÇÃO -->
       <button class="toggle">Easy Head</button>
 
       <button id="bypassBtn" class="toggle">Ativar bypass</button>
