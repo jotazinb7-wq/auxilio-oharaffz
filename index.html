@@ -66,8 +66,10 @@ button.active{background:var(--main);box-shadow:0 0 20px var(--main)}
 /* INJETAR */
 #inject{margin-top:16px;background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));animation:rgb 2s linear infinite}
 
-/* BOTÃO FIXO PARA ABRIR FREE FIRE */
-#openFF{background:#111;margin-top:10px;font-weight:bold;color:#fff;box-shadow:0 0 10px var(--main);border-radius:12px;padding:12px;}
+/* BOTÃO FIXO APÓS INJETAR */
+#injectContainer button{
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -124,9 +126,7 @@ button.active{background:var(--main);box-shadow:0 0 20px var(--main)}
       </div>
 
       <button id="inject">INJETAR</button>
-
-      <!-- BOTÃO FIXO PARA ABRIR FREE FIRE -->
-      <button id="openFF">Abra o Free Fire</button>
+      <div id="injectContainer"></div> <!-- Aqui o botão “Abra o Free Fire” vai aparecer dinamicamente -->
 
     </div>
   </div>
@@ -173,8 +173,9 @@ backBtn.onclick=()=>{infoScreen.style.display="none";};
 
 /* Reset INJETAR */
 const injectBtn=document.getElementById("inject");
+const injectContainer=document.getElementById("injectContainer");
 let injecting=false,injected=false;
-function resetInject(){ injecting=false; injected=false; injectBtn.textContent="INJETAR"; }
+function resetInject(){ injecting=false; injected=false; injectBtn.textContent="INJETAR"; injectContainer.innerHTML=""; }
 
 /* Seleções */
 document.querySelectorAll(".hs").forEach(b=>{
@@ -198,17 +199,28 @@ bypassBtn.onclick=()=>{
   resetInject();
 };
 
-/* INJETAR */
+/* INJETAR com botão fixo após */
 injectBtn.onclick=()=>{
   if(injecting||injected) return;
   injecting=true; injectBtn.textContent="Injetando códigos...";
-  setTimeout(()=>{ injecting=false; injected=true; injectBtn.textContent="Códigos injetados com sucesso"; },2000); // menor tempo
-};
+  setTimeout(()=>{
+      injecting=false; injected=true; injectBtn.textContent="Códigos injetados com sucesso";
 
-/* BOTÃO FIXO ABRIR FREE FIRE */
-const openFF=document.getElementById("openFF");
-openFF.onclick=()=>{
-  alert("Simulação: Abra o Free Fire"); // só simula no HTML/APK WebView
+      // Botão que aparece somente após injetar
+      injectContainer.innerHTML=''; // limpa se existir
+      const openBtn=document.createElement("button");
+      openBtn.textContent="Abra o Free Fire";
+      openBtn.style.width="100%";
+      openBtn.style.padding="12px";
+      openBtn.style.marginTop="10px";
+      openBtn.style.borderRadius="12px";
+      openBtn.style.background="#111";
+      openBtn.style.color="#fff";
+      openBtn.style.fontWeight="bold";
+      openBtn.onclick=()=>{ alert("Simulação: Abra o Free Fire"); };
+      injectContainer.appendChild(openBtn);
+
+  },2000); // 2s de espera
 };
 
 /* TEMAS */
